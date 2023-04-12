@@ -9,6 +9,9 @@ const inputDate = document.querySelector('#datetime-picker');
 //Start button
 const startButton = document.querySelector('.button-start');
 
+//Date today
+const today = new Date();
+
 //Options for the date and time for flatpikr
 const options = {
     enableTime: true,
