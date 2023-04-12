@@ -41,6 +41,11 @@ img {
   text-transform: uppercase;
 }
 
+.button-start:disabled{
+  background-color: #EBEBEB;
+  color: black;
+}
+
 .timer{
   display: flex;
   gap: 15px;

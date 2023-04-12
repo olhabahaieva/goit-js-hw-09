@@ -8,6 +8,7 @@ const inputDate = document.querySelector('#datetime-picker');
 
 //Start button
 const startButton = document.querySelector('.button-start');
+startButton.disabled = true;
 
 //Date today
 const today = new Date();
@@ -19,7 +20,14 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-      console.log(selectedDates[0]);
+        const selectedDate = selectedDates[0];
+        if(selectedDate < today){
+            window.alert("Please choose a date in the future");
+          } else{
+            console.log(selectedDates[0]);
+          }
+      
+      
     },
   };
 
