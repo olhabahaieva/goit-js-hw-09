@@ -25,6 +25,9 @@ img {
   border-radius: 7px;
   border: 1px solid #979797;
 }
+#datetime-picker[type=text]{
+  padding: 0 15px 0 15px;
+}
 
 .button-start{
   border: none;
