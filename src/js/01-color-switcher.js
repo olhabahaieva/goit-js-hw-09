@@ -12,8 +12,10 @@ let timerId = null;
 
 //Function - Random color generator
 function getRandomHexColor() {
-    return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
-  }
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
 
 //Event listener for start button
 startButton.addEventListener('click', onClickStart);
@@ -22,19 +24,19 @@ startButton.addEventListener('click', onClickStart);
 stopButton.addEventListener('click', onClickStop);
 
 //Function onClick for startButton
-function onClickStart(evt){
-    evt.preventDefault();
-    startButton.disabled = true;
-    stopButton.disabled = false;
-    timerId = setInterval(()=>{
-        body.style.backgroundColor = getRandomHexColor();
-    }, 1000)
+function onClickStart(evt) {
+  evt.preventDefault();
+  startButton.disabled = true;
+  stopButton.disabled = false;
+  timerId = setInterval(() => {
+    body.style.backgroundColor = getRandomHexColor();
+  }, 1000);
 }
 
 //Function onClick for stopButton
-function onClickStop(evt){
-    evt.preventDefault();
-    clearInterval(timerId)
-    stopButton.disabled = true;
-    startButton.disabled = false;
+function onClickStop(evt) {
+  evt.preventDefault();
+  clearInterval(timerId);
+  stopButton.disabled = true;
+  startButton.disabled = false;
 }
