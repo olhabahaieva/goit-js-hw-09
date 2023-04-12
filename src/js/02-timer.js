@@ -6,6 +6,9 @@ import "flatpickr/dist/flatpickr.min.css";
 //Input to select a date
 const inputDate = document.querySelector('#datetime-picker');
 
+//Start button
+const startButton = document.querySelector('.button-start');
+
 //Options for the date and time for flatpikr
 const options = {
     enableTime: true,
