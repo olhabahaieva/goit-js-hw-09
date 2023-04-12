@@ -36,4 +36,5 @@ function onClickStop(evt){
     evt.preventDefault();
     stopButton.disabled = true;
     startButton.disabled = false;
+    clearInterval(timerId)
 }
