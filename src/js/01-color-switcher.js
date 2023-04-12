@@ -34,7 +34,7 @@ function onClickStart(evt){
 //Function onClick for stopButton
 function onClickStop(evt){
     evt.preventDefault();
+    clearInterval(timerId)
     stopButton.disabled = true;
     startButton.disabled = false;
-    clearInterval(timerId)
 }
