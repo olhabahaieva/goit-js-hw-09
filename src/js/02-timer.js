@@ -22,9 +22,11 @@ const options = {
     onClose(selectedDates) {
         const selectedDate = selectedDates[0];
         if(selectedDate < today){
+            startButton.disabled = true;
             window.alert("Please choose a date in the future");
           } else{
             console.log(selectedDates[0]);
+            startButton.disabled = false;
           }
       
       
