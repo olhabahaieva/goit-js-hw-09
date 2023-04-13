@@ -60,11 +60,16 @@ function convertMs(ms) {
 
   setInterval(() => {
     const diffMs = selectedDate - new Date();
-    daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
-    hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
-    minutesDigits.textContent = addLeadingZero(Math.floor(((diffMs % day) % hour) / minute));
-    secondsDigits.textContent = addLeadingZero(Math.floor((((diffMs % day) % hour) % minute) / second));
-  }, 1000);
+    if(diffMs < 0){
+      clearInterval();
+    } else{
+      daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
+      hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
+      minutesDigits.textContent = addLeadingZero(Math.floor(((diffMs % day) % hour) / minute));
+      secondsDigits.textContent = addLeadingZero(Math.floor((((diffMs % day) % hour) % minute) / second));
+    
+    }
+   }, 1000);
 
   return { days, hours, minutes, seconds };
 }
