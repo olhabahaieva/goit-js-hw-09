@@ -1,7 +1,7 @@
 // Описан в документации
-import flatpickr from "flatpickr";
+import flatpickr from 'flatpickr';
 // Дополнительный импорт стилей
-import "flatpickr/dist/flatpickr.min.css";
+import 'flatpickr/dist/flatpickr.min.css';
 
 //Input to select a date
 const inputDate = document.querySelector('#datetime-picker');
@@ -23,7 +23,7 @@ const startButton = document.querySelector('.button-start');
 startButton.disabled = true;
 
 //Interval var
-let intervalID
+let intervalID;
 
 //// Declare selectedDate variable outside of functions
 let selectedDate;
@@ -38,7 +38,7 @@ const options = {
     selectedDate = selectedDates[0];
     if (selectedDate < new Date()) {
       startButton.disabled = true;
-      window.alert("Please choose a date in the future");
+      window.alert('Please choose a date in the future');
     } else {
       console.log(selectedDate);
       startButton.disabled = false;
@@ -63,25 +63,28 @@ function convertMs(ms) {
     clearInterval(intervalID);
     startButton.disabled = true;
   }
-   
-  if(!startButton.disabled){
+
+  if (!startButton.disabled) {
     const diffMs = selectedDate - new Date();
- 
+
     daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
     hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
-    minutesDigits.textContent = addLeadingZero(Math.floor(((diffMs % day) % hour) / minute));
-    secondsDigits.textContent = addLeadingZero(Math.floor((((diffMs % day) % hour) % minute) / second));
-   
+    minutesDigits.textContent = addLeadingZero(
+      Math.floor(((diffMs % day) % hour) / minute)
+    );
+    secondsDigits.textContent = addLeadingZero(
+      Math.floor((((diffMs % day) % hour) % minute) / second)
+    );
 
-
-return { days, hours, minutes, seconds };
+    return { days, hours, minutes, seconds };
+  } else {
+    return { days: 00, hours: 00, minutes: 00, seconds: 00 };
   }
-    
 }
-  
-  console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-  console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-  console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+
+console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
+console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 
 //Start button event listener
 startButton.addEventListener('click', () => {
@@ -94,6 +97,6 @@ startButton.addEventListener('click', () => {
   }
 });
 
-function addLeadingZero(value){
-  return value.toString().padStart(2, "0")
+function addLeadingZero(value) {
+  return value.toString().padStart(2, '0');
 }
