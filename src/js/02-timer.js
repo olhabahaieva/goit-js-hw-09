@@ -42,6 +42,17 @@ const options = {
     } else {
       console.log(selectedDate);
       startButton.disabled = false;
+      options.defaultDate = selectedDate;
+      const { day, hour, minute, second } = convertMs(selectedDate - new Date());
+      
+      daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
+    hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
+    minutesDigits.textContent = addLeadingZero(
+      Math.floor(((diffMs % day) % hour) / minute)
+    );
+    secondsDigits.textContent = addLeadingZero(
+      Math.floor((((diffMs % day) % hour) % minute) / second)
+    );
     }
   },
 };
