@@ -36,23 +36,25 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     selectedDate = selectedDates[0];
-    const diffMs = selectedDate - new Date();
+    const ms = selectedDate - new Date();
     if (selectedDate < new Date()) {
       startButton.disabled = true;
       window.alert('Please choose a date in the future');
     } else {
       console.log(selectedDate);
       startButton.disabled = false;
-      const { day, hour, minute, second } = convertMs(selectedDate - new Date());
-      
-      daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
-    hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
-    minutesDigits.textContent = addLeadingZero(
-      Math.floor(((diffMs % day) % hour) / minute)
-    );
-    secondsDigits.textContent = addLeadingZero(
-      Math.floor((((diffMs % day) % hour) % minute) / second)
-    );
+      const { day, hour, minute, second } = convertMs(
+        selectedDate - new Date()
+      );
+
+      daysDigits.textContent = addLeadingZero(Math.floor(ms / day));
+      hoursDigits.textContent = addLeadingZero(Math.floor((ms % day) / hour));
+      minutesDigits.textContent = addLeadingZero(
+        Math.floor(((ms % day) % hour) / minute)
+      );
+      secondsDigits.textContent = addLeadingZero(
+        Math.floor((((ms % day) % hour) % minute) / second)
+      );
     }
   },
 };
@@ -70,8 +72,6 @@ function convertMs(ms) {
   const hours = Math.floor((ms % day) / hour);
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-  
-  
 
   if (!startButton.disabled) {
     const diffMs = selectedDate - new Date();
@@ -85,8 +85,8 @@ function convertMs(ms) {
       Math.floor((((diffMs % day) % hour) % minute) / second)
     );
 
-    return { days, hours, minutes, seconds };
-  } 
+    return { day, hour, minute, second };
+  }
 }
 
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
