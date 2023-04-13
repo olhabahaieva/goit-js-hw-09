@@ -71,10 +71,7 @@ function convertMs(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   
-  if (ms <= 0) {
-    clearInterval(intervalID);
-    startButton.disabled = true;
-  }
+  
 
   if (!startButton.disabled) {
     const diffMs = selectedDate - new Date();
@@ -103,6 +100,10 @@ startButton.addEventListener('click', () => {
     intervalID = setInterval(() => {
       const remainingMs = selectedDate - new Date();
       convertMs(remainingMs);
+      if (diffMs <= 0) {
+        clearInterval(intervalID);
+        startButton.disabled = true;
+      }
     }, 1000);
   }
 });
