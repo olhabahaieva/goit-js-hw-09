@@ -36,6 +36,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     selectedDate = selectedDates[0];
+    const diffMs = selectedDate - new Date();
     if (selectedDate < new Date()) {
       startButton.disabled = true;
       window.alert('Please choose a date in the future');
@@ -69,6 +70,7 @@ function convertMs(ms) {
   const hours = Math.floor((ms % day) / hour);
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  
   if (ms <= 0) {
     clearInterval(intervalID);
     startButton.disabled = true;
