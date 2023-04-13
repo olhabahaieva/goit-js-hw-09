@@ -58,10 +58,13 @@ function convertMs(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
+  //Interval var
+  let intervalID
+  
   setInterval(() => {
     const diffMs = selectedDate - new Date();
     if(diffMs < 0){
-      clearInterval();
+      clearInterval(intervalID);
     } else{
       daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
       hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
