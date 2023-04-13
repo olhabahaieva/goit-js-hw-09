@@ -98,8 +98,7 @@ startButton.addEventListener('click', () => {
   const diffMs = selectedDate - new Date();
   if (diffMs > 0) {
     intervalID = setInterval(() => {
-      const remainingMs = selectedDate - new Date();
-      convertMs(remainingMs);
+      convertMs(diffMs);
       if (diffMs <= 0) {
         clearInterval(intervalID);
         startButton.disabled = true;
