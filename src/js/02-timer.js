@@ -59,20 +59,24 @@ function convertMs(ms) {
   const hours = Math.floor((ms % day) / hour);
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
+  if (ms <= 0) {
+    clearInterval(intervalID);
+    startButton.disabled = true;
+  }
+   
+  if(!startButton.disabled){
     const diffMs = selectedDate - new Date();
  
-      daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
-      hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
-      minutesDigits.textContent = addLeadingZero(Math.floor(((diffMs % day) % hour) / minute));
-      secondsDigits.textContent = addLeadingZero(Math.floor((((diffMs % day) % hour) % minute) / second));
-      if (ms <= 0) {
-        clearInterval(intervalID);
-        startButton.disabled = true;
-      }
+    daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
+    hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
+    minutesDigits.textContent = addLeadingZero(Math.floor(((diffMs % day) % hour) / minute));
+    secondsDigits.textContent = addLeadingZero(Math.floor((((diffMs % day) % hour) % minute) / second));
+   
 
 
-  return { days, hours, minutes, seconds };
+return { days, hours, minutes, seconds };
+  }
+    
 }
   
   console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
