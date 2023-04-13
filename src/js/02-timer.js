@@ -42,7 +42,6 @@ const options = {
     } else {
       console.log(selectedDate);
       startButton.disabled = false;
-      options.defaultDate = selectedDate;
       const { day, hour, minute, second } = convertMs(selectedDate - new Date());
       
       daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
