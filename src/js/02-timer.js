@@ -89,9 +89,7 @@ function convertMs(ms) {
     );
 
     return { days, hours, minutes, seconds };
-  } else {
-    return { days: 00, hours: 00, minutes: 00, seconds: 00 };
-  }
+  } 
 }
 
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
