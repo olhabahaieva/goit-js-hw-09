@@ -60,10 +60,10 @@ function convertMs(ms) {
 
   setInterval(() => {
     const diffMs = selectedDate - new Date();
-    daysDigits.textContent = Math.floor(diffMs / day);
-    hoursDigits.textContent = Math.floor((diffMs % day) / hour);
-    minutesDigits.textContent = Math.floor(((diffMs % day) % hour) / minute);
-    secondsDigits.textContent = Math.floor((((diffMs % day) % hour) % minute) / second);
+    daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
+    hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
+    minutesDigits.textContent = addLeadingZero(Math.floor(((diffMs % day) % hour) / minute));
+    secondsDigits.textContent = addLeadingZero(Math.floor((((diffMs % day) % hour) % minute) / second));
   }, 1000);
 
   return { days, hours, minutes, seconds };
@@ -78,3 +78,7 @@ startButton.addEventListener('click', () => {
   const diffMs = selectedDate - new Date();
   convertMs(diffMs);
 })
+
+function addLeadingZero(value){
+  return value.toString().padStart(2, "0")
+}
