@@ -22,6 +22,9 @@ const secondsDigits = document.querySelector('.value[data-seconds]');
 const startButton = document.querySelector('.button-start');
 startButton.disabled = true;
 
+//Interval var
+let intervalID
+
 //// Declare selectedDate variable outside of functions
 let selectedDate;
 
@@ -45,7 +48,6 @@ const options = {
 
 flatpickr(inputDate, options);
 
-
 //function for timer
 function convertMs(ms) {
   const second = 1000;
@@ -58,21 +60,17 @@ function convertMs(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-  //Interval var
-  let intervalID
-  
-  setInterval(() => {
     const diffMs = selectedDate - new Date();
-    if(diffMs < 0){
-      clearInterval(intervalID);
-    } else{
+ 
       daysDigits.textContent = addLeadingZero(Math.floor(diffMs / day));
       hoursDigits.textContent = addLeadingZero(Math.floor((diffMs % day) / hour));
       minutesDigits.textContent = addLeadingZero(Math.floor(((diffMs % day) % hour) / minute));
       secondsDigits.textContent = addLeadingZero(Math.floor((((diffMs % day) % hour) % minute) / second));
-    
-    }
-   }, 1000);
+      if (ms <= 0) {
+        clearInterval(intervalID);
+        startButton.disabled = true;
+      }
+
 
   return { days, hours, minutes, seconds };
 }
@@ -84,8 +82,13 @@ function convertMs(ms) {
 //Start button event listener
 startButton.addEventListener('click', () => {
   const diffMs = selectedDate - new Date();
-  convertMs(diffMs);
-})
+  if (diffMs > 0) {
+    intervalID = setInterval(() => {
+      const remainingMs = selectedDate - new Date();
+      convertMs(remainingMs);
+    }, 1000);
+  }
+});
 
 function addLeadingZero(value){
   return value.toString().padStart(2, "0")
