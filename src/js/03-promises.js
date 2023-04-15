@@ -12,10 +12,10 @@ function onFormSubmit(event) {
   for (let i = 0; i < amount.value; i += 1) {
     createPromise(i, delay.value)
       .then(({ position, delay }) => {
-        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
       .catch(({ position, delay }) => {
-        console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
   }
 }
@@ -26,14 +26,8 @@ function createPromise(position, delay) {
     setTimeout(() => {
       if (shouldResolve > 0.3) {
         res({ position, delay });
-        Notiflix.Notify.success(
-          `✅ Fulfilled promise ${position} in ${delay}ms`
-        );
       } else {
         rej({ position, delay });
-        Notiflix.Notify.failure(
-          `❌ Rejected promise ${position} in ${delay}ms`
-        );
       }
     }, delay);
   });
