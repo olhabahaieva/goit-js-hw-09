@@ -5,6 +5,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 //Input to select a date
 const inputDate = document.querySelector('#datetime-picker');
+const inputDateValue = inputDate.value;
 
 //Days digits selector
 const daysDigits = document.querySelector('.value[data-days]');
@@ -84,14 +85,15 @@ function convertMs(ms) {
     secondsDigits.textContent = addLeadingZero(
       Math.floor((((diffMs % day) % hour) % minute) / second)
     );
-
-    return { day, hour, minute, second };
+    
+  } else {
+    return { days, hours, minutes, seconds };
   }
 }
 
-// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
+console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 
 //Start button event listener
 startButton.addEventListener('click', () => {
