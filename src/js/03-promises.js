@@ -26,10 +26,10 @@ function createPromise(position, delay) {
     setTimeout(() => {
       if (shouldResolve > 0.3) {
         res({ position, delay });
-        Notiflix.Notify.success('Sol lucet omnibus');
+        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       } else {
         rej({ position, delay });
-        Notiflix.Notify.failure('Qui timide rogat docet negare');
+        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       }
     }, delay);
   });
