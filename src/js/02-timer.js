@@ -41,20 +41,10 @@ const options = {
       startButton.disabled = true;
       window.alert('Please choose a date in the future');
     } else {
-      console.log(selectedDate);
       startButton.disabled = false;
-      const { day, hour, minute, second } = convertMs(
-        selectedDate - new Date()
-      );
-
-      daysDigits.textContent = addLeadingZero(Math.floor(ms / day));
-      hoursDigits.textContent = addLeadingZero(Math.floor((ms % day) / hour));
-      minutesDigits.textContent = addLeadingZero(
-        Math.floor(((ms % day) % hour) / minute)
-      );
-      secondsDigits.textContent = addLeadingZero(
-        Math.floor((((ms % day) % hour) % minute) / second)
-      );
+      convertMs(ms)
+      addLeadingZero(ms)
+      console.log(selectedDate);
     }
   },
 };
