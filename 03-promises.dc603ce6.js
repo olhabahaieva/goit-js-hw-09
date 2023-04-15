@@ -1,0 +1,2 @@
+document.querySelector("input[name=delay]"),document.querySelector("input[name=step]"),document.querySelector("input[name=amount]");function e(e,t){Math.random()}document.querySelector("button[type=submit]").addEventListener("click",(function(t){t.preventDefault(),e()})),e().then((({position:e,delay:t})=>{console.log(`✅ Fulfilled promise ${e} in ${t}ms`)})).catch((({position:e,delay:t})=>{console.log(`❌ Rejected promise ${e} in ${t}ms`)}));
+//# sourceMappingURL=03-promises.dc603ce6.js.map
