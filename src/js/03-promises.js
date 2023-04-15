@@ -19,9 +19,13 @@ const buttonElement = document.querySelector('button[type=submit]');
 buttonElement.addEventListener("click", onStart);
 
 function onStart() {
-  const promises = Array.from({ length: inputAmount }, (_, idx) => {
-    const delay = inputFirstDelay.value + (idx * inputDelayStep.value);
-    return createPromise(idx, delay);
+  const promises = [...form].map((item, idx) => {
+    item.value = "";
+    const promise = createPromise(idx);
+    promise
+      .then((value) => (item.textContent = value))
+      .catch((err) => (item.textContent = err));
+    return promise;
   });
 
   Promise.allSettled(promises).then((promise) => {
@@ -29,13 +33,13 @@ function onStart() {
     const isAllRes = promise.every(({ status }) => status === "fulfilled");
 
     setTimeout(() => {
-      if (isAllRej) {
+      if (isAllRej || isAllRes) {
         Notiflix.Notify.failure('Qui timide rogat docet negare');
       } else {
         Notiflix.Notify.success('Sol lucet omnibus');
       }
 
-    }, inputAmount.value * inputDelayStep.value);
+    }, 1000);
   })
 }
 
@@ -43,10 +47,10 @@ function createPromise(position, delay) {
   return new Promise((res, rej) => {
     const shouldResolve = Math.random() > 0.3;
     setTimeout(() => {
-      if (shouldResolve) {
-        res({ position, delay });
+      if (shouldResolve > 0.3) {
+        res( Notiflix.Notify.success('Sol lucet omnibus'));
       } else {
-        rej({ position, delay });
+        rej(Notiflix.Notify.failure('Qui timide rogat docet negare'));
       }
     }, 0);
   })
