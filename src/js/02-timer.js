@@ -83,10 +83,6 @@ startButton.addEventListener('click', () => {
     intervalID = setInterval(() => {
       convertMs(diffMs);
       addLeadingZero(diffMs);
-      if (diffMs <= 0) {
-        clearInterval(intervalID);
-        startButton.disabled = true;
-      }
     }, 1000);
   }
 });
