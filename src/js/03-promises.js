@@ -9,8 +9,8 @@ form.addEventListener('submit', onFormSubmit);
 function onFormSubmit(event) {
   event.preventDefault();
   const { delay, step, amount } = event.target.elements;
-  for (let i = amount; i < amount; i += 1) {
-    createPromise(position, delay)
+  for (let i = 0; i < amount.value; i += 1) {
+    createPromise(i, delay.value)
       .then(({ position, delay }) => {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
