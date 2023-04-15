@@ -1,3 +1,5 @@
+import Notiflix from 'notiflix';
+
 //Form element
 const form = document.querySelectorAll('.form');
 
@@ -33,9 +35,9 @@ Promise.allSettled(promises).then((promise)=>{
 
   setTimeout(()=>{
     if(isAllRej){
-      alert("Rejected");
+      Notiflix.Notify.failure('Qui timide rogat docet negare');
     } else {
-      alert("Success");
+      Notiflix.Notify.success('Sol lucet omnibus');
     }
     
   }, inputAmount);
