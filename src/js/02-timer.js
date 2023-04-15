@@ -5,7 +5,6 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 //Input to select a date
 const inputDate = document.querySelector('#datetime-picker');
-const inputDateValue = inputDate.value;
 
 //Days digits selector
 const daysDigits = document.querySelector('.value[data-days]');
