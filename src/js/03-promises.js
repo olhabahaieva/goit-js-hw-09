@@ -18,49 +18,41 @@ const buttonElement = document.querySelector('button[type=submit]');
 //Event listener
 buttonElement.addEventListener("click", onStart);
 
-function onStart(){
- const promises = [...form].map((item, idx)=>{
-  item.textContent = "";
+function onStart() {
+  const promises = Array.from({ length: inputAmount }, (_, idx) => {
+    const delay = inputFirstDelay.value + (idx * inputDelayStep.value);
+    return createPromise(idx, delay);
+  });
 
-  const promise = createPromise(idx);
-  promise
-  .then((value) => (item.textContent = value))
-  .catch((err) => (item.textContent = err));
-  return promise;
-})
+  Promise.allSettled(promises).then((promise) => {
+    const isAllRej = promise.every(({ status }) => status === "rejected");
+    const isAllRes = promise.every(({ status }) => status === "fulfilled");
 
-Promise.allSettled(promises).then((promise)=>{
-  const isAllRej = promise.every(({ status }) => status === "rejected");
-  const isAllRes = promise.every(({ status }) => status === "fulfilled");
+    setTimeout(() => {
+      if (isAllRej) {
+        Notiflix.Notify.failure('Qui timide rogat docet negare');
+      } else {
+        Notiflix.Notify.success('Sol lucet omnibus');
+      }
 
-  setTimeout(()=>{
-    if(isAllRej){
-      Notiflix.Notify.failure('Qui timide rogat docet negare');
-    } else {
-      Notiflix.Notify.success('Sol lucet omnibus');
-    }
-    
-  }, inputAmount);
-
-})
+    }, inputAmount.value * inputDelayStep.value);
+  })
 }
-
-
 
 function createPromise(position, delay) {
-  return new Promise((res, rej)=>{
+  return new Promise((res, rej) => {
     const shouldResolve = Math.random() > 0.3;
-    setTimeout(()=> {
-      if (shouldResolve > 0.3) {
-        res(`✅ Fulfilled promise ${position} in ${delay}ms`);
+    setTimeout(() => {
+      if (shouldResolve) {
+        res({ position, delay });
       } else {
-        rej(`❌ Rejected promise ${position} in ${delay}ms`);
-    }
-   
-  }, delay * 1000);
-})
+        rej({ position, delay });
+      }
+    }, 0);
+  })
 }
 
+//Testing promise
 createPromise(2, 1500)
   .then(({ position, delay }) => {
     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
