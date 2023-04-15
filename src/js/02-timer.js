@@ -37,14 +37,11 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     selectedDate = selectedDates[0];
-    const ms = selectedDate - new Date();
     if (selectedDate < new Date()) {
       startButton.disabled = true;
       Notiflix.Notify.warning('Please choose a date in the future');
     } else {
       startButton.disabled = false;
-      convertMs(ms)
-      addLeadingZero(ms)
     }
   },
 };
@@ -74,7 +71,6 @@ function convertMs(ms) {
     secondsDigits.textContent = addLeadingZero(
       Math.floor((((diffMs % day) % hour) % minute) / second)
     );
-    
   } else {
     return { days, hours, minutes, seconds };
   }
@@ -86,6 +82,7 @@ startButton.addEventListener('click', () => {
   if (diffMs > 0) {
     intervalID = setInterval(() => {
       convertMs(diffMs);
+      addLeadingZero(diffMs);
       if (diffMs <= 0) {
         clearInterval(intervalID);
         startButton.disabled = true;
