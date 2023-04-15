@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 // Описан в документации
 import flatpickr from 'flatpickr';
 // Дополнительный импорт стилей
@@ -39,7 +40,7 @@ const options = {
     const ms = selectedDate - new Date();
     if (selectedDate < new Date()) {
       startButton.disabled = true;
-      window.alert('Please choose a date in the future');
+      Notiflix.Notify.warning('Please choose a date in the future');
     } else {
       startButton.disabled = false;
       convertMs(ms)
