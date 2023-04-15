@@ -1,2 +1,0 @@
-!function(){document.querySelector("input[name=delay]"),document.querySelector("input[name=step]"),document.querySelector("input[name=amount]");function e(e,n){Math.random()}document.querySelector("button[type=submit]").addEventListener("click",(function(n){n.preventDefault(),e()})),e().then((function(e){var n=e.position,t=e.delay;console.log("✅ Fulfilled promise ".concat(n," in ").concat(t,"ms"))})).catch((function(e){var n=e.position,t=e.delay;console.log("❌ Rejected promise ".concat(n," in ").concat(t,"ms"))}))}();
-//# sourceMappingURL=03-promises.426321a6.js.map
