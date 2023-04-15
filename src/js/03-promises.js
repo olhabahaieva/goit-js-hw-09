@@ -26,7 +26,6 @@ function onStart(){
   .catch((err) => (item.textContent = err));
   return promise;
 })
-}
 
 Promise.allSettled(promises).then((promise)=>{
   const isAllRej = promise.every(({ status }) => status === "rejected");
@@ -42,6 +41,9 @@ Promise.allSettled(promises).then((promise)=>{
   }, inputAmount);
 
 })
+}
+
+
 
 function createPromise(position, delay) {
   return new Promise((res, rej)=>{
