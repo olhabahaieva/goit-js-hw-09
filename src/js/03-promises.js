@@ -9,14 +9,18 @@ form.addEventListener('submit', onFormSubmit);
 function onFormSubmit(event) {
   event.preventDefault();
   const { delay, step, amount } = event.target.elements;
-  for (let i = 0; i < amount.value; i += 1) {
-    createPromise(i, delay.value)
-      .then(({ position, delay }) => {
-        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-      })
-      .catch(({ position, delay }) => {
-        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-      });
+  let currentDelay = delay.value;
+  for (let position = 1; position <= amount.value; position += 1) {
+    setTimeout(() => {
+      createPromise(position, delay.value)
+        .then(({ position, delay }) => {
+          Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        })
+        .catch(({ position, delay }) => {
+          Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+        });
+    }, currentDelay);
+    currentDelay += step.value;
   }
 }
 
