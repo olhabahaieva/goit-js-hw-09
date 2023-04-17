@@ -9,9 +9,9 @@ form.addEventListener('submit', onFormSubmit);
 function onFormSubmit(event) {
   event.preventDefault();
   const { delay, step, amount } = event.target.elements;
-  let currentDelay = delay.value;
+  let currentDelay = Number(delay.value);
   for (let position = 1; position <= amount.value; position += 1) {
-    setTimeout(() => {
+   
       createPromise(position, delay.value)
         .then(({ position, delay }) => {
           Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -19,8 +19,8 @@ function onFormSubmit(event) {
         .catch(({ position, delay }) => {
           Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
         });
-    }, currentDelay);
-    currentDelay += step.value;
+    
+    currentDelay += Number(step.value);
   }
 }
 
