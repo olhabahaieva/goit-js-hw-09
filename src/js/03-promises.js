@@ -1,38 +1,50 @@
 import Notiflix from 'notiflix';
+const form = document.querySelector('form')
+form.addEventListener('submit', onSubmitBtnClick)
 
-//Form element
-const form = document.querySelector('.form');
 
-//Event listener
-form.addEventListener('submit', onFormSubmit);
+function onSubmitBtnClick(event) {
+ event.preventDefault()
 
-function onFormSubmit(event) {
-  event.preventDefault();
-  const { delay, step, amount } = event.target.elements;
-  let currentDelay = Number(delay.value);
-  for (let position = 1; position <= amount.value; position += 1) {
-   
-      createPromise(position, delay.value)
-        .then(({ position, delay }) => {
-          Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-        })
-        .catch(({ position, delay }) => {
-          Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-        });
-    
-    currentDelay += Number(step.value);
-  }
+
+ const formElements = event.target.elements
+
+
+ let delay = parseInt(formElements.delay.value)
+ const step = parseInt(formElements.step.value)
+ const amount = parseInt(formElements.amount.value)
+
+
+ for (let position = 1; position <= amount; position += 1) {
+   createPromise(position, delay)
+   .then(({ position, delay }) => {
+     Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+   })
+   .catch(({ position, delay }) => {
+     Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+   });
+
+   delay += step
+ }
 }
+
+
+
 
 function createPromise(position, delay) {
-  return new Promise((res, rej) => {
-    const shouldResolve = Math.random() > 0.3;
-    setTimeout(() => {
-      if (shouldResolve) {
-        res({ position, delay });
-      } else {
-        rej({ position, delay });
-      }
-    }, delay);
-  });
-}
+ const shouldResolve = Math.random() > 0.3;
+ return new Promise((resolve, reject) => {
+   setTimeout(() => {
+     if (shouldResolve) {
+       resolve({ position, delay })
+
+
+     } else {
+       reject({ position, delay })
+     }
+   }, delay);
+ })
+};
+
+
+
