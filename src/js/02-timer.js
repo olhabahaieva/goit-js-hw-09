@@ -85,8 +85,12 @@ startButton.addEventListener('click', () => {
       const timeObj = convertMs(diffMs);
       updateTimerDisplay(timeObj);
       diffMs -= 1000;
+      if(diffMs < 0) {
+        clearInterval(intervalID);
+      }
     }, 1000);
   }
+   
 });
 
 
